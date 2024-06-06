@@ -2,6 +2,7 @@ package cqut.keshe3.mapper;
 
 import cqut.keshe3.domain.Check;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
 * @author MaplesukiD
@@ -9,6 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @createDate 2024-05-30 22:24:05
 * @Entity cqut.keshe3.domain.Check
 */
+@Mapper
 public interface CheckMapper extends BaseMapper<Check> {
 
 }

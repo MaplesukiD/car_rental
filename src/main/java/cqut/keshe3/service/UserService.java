@@ -1,5 +1,6 @@
 package cqut.keshe3.service;
 
+import cqut.keshe3.Exception.LoginException;
 import cqut.keshe3.domain.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -10,4 +11,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface UserService extends IService<User> {
 
+    String login(User user) throws LoginException;
 }
