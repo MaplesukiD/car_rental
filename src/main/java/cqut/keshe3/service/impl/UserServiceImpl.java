@@ -3,8 +3,7 @@ package cqut.keshe3.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cqut.keshe3.Exception.LoginException;
-import cqut.keshe3.common.Result;
+import cqut.keshe3.Exception.CommonException;
 import cqut.keshe3.domain.User;
 import cqut.keshe3.dto.UserDto;
 import cqut.keshe3.service.UserService;
@@ -32,8 +31,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private RedisTemplate redisTemplate;
 
 
+    // 登录
     @Override
-    public String login(User user) throws LoginException {
+    public String login(User user) throws CommonException {
         // 1. 取出username 、 password 、 type
         String username = user.getUsername();
         String password = user.getPassword();
@@ -43,17 +43,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         lqw.eq(User::getUsername, username);
         User temp = userMapper.selectOne(lqw);
         if(temp == null){
-            throw new LoginException("用户名不存在");
+            throw new CommonException("用户名不存在");
         }
 
         // 3. 继续匹配密码
         if(!temp.getPassword().equals(password)){
-            throw new LoginException("密码错误");
+            throw new CommonException("密码错误");
         }
 
         // 4. 查看账号活跃状态
         if(temp.getAvailable() == 0){
-            throw new LoginException("您已被禁用");
+            throw new CommonException("您已被禁用");
         }
 
         // 5. 产看身份是否匹配
@@ -66,6 +66,36 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         redisTemplate.opsForValue().set(token, userDto, 1, TimeUnit.HOURS);
         return token;
+    }
+
+    // 注册
+    @Override
+    public void register(User user) throws CommonException {
+        // 传入数据：用户名、密码、真名、年龄、性别、身份证、地址
+        // 缺少数据：类型、活跃状态
+
+        // 1.添加缺少数据
+        user.setAvailable(1);
+        user.setType(1);
+
+        // 2.查询账号是否存在
+        LambdaQueryWrapper<User> lqw = new LambdaQueryWrapper<>();
+        lqw.eq(User::getUsername, user.getUsername());
+        User temp = userMapper.selectOne(lqw);
+        if(temp != null){
+            throw new CommonException("账号已存在");
+        }
+
+        // 3.插入账号
+        userMapper.insert(user);
+    }
+
+    // 退出
+    @Override
+    public void logout(String token) {
+        if (redisTemplate.hasKey(token)){
+            redisTemplate.delete(token);
+        }
     }
 
 }

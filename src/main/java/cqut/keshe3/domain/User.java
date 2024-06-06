@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 
 /**
- * 
+ *
  * @TableName user
  */
 @TableName(value ="user")
@@ -15,7 +15,7 @@ public class User implements Serializable {
     /**
      * 用户id
      */
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     /**

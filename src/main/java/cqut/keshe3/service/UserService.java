@@ -1,6 +1,6 @@
 package cqut.keshe3.service;
 
-import cqut.keshe3.Exception.LoginException;
+import cqut.keshe3.Exception.CommonException;
 import cqut.keshe3.domain.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -11,5 +11,12 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface UserService extends IService<User> {
 
-    String login(User user) throws LoginException;
+    // 登录
+    String login(User user) throws CommonException;
+
+    // 注册
+    void register(User user) throws CommonException;
+
+    // 退出
+    void logout(String token);
 }

@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 
+ *
  * @TableName check
  */
 @TableName(value ="check")
@@ -16,7 +16,7 @@ public class Check implements Serializable {
     /**
      * id
      */
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     /**

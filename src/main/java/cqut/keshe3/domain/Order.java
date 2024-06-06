@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 
+ *
  * @TableName order
  */
 @TableName(value ="order")
@@ -17,7 +17,7 @@ public class Order implements Serializable {
     /**
      * 订单id
      */
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     /**

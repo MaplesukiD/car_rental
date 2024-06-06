@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 
+ *
  * @TableName car
  */
 @TableName(value ="car")
@@ -17,7 +17,7 @@ public class Car implements Serializable {
     /**
      * 车id
      */
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     /**

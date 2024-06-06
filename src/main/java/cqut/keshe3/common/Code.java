@@ -28,6 +28,9 @@ public class Code {
     public static final Integer PUSH_OK = 50061;
     public static final String PUSH_OK_MESSAGE="发布成功";
 
+    public static final Integer LOGOUT_OK = 50071;
+    public static final String LOGOUT_OK_MESSAGE = "退出成功";
+
     //失败
     public static final Integer SAVE_ERR = 50010;
     public static final String SAVE_ERR_MESSAGE="注册失败";
