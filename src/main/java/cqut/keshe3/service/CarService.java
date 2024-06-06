@@ -1,5 +1,6 @@
 package cqut.keshe3.service;
 
+import cqut.keshe3.Exception.CommonException;
 import cqut.keshe3.domain.Car;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -10,4 +11,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface CarService extends IService<Car> {
 
+    // 汽车入库
+    void saveCar(Car car) throws CommonException;
+
+    // 更新汽车信息
+    void updateCar(Car car) throws CommonException;
 }

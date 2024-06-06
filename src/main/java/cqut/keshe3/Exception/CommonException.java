@@ -1,8 +1,7 @@
 package cqut.keshe3.Exception;
 
 /**
- 登录异常类
-
+ 通用异常类
  */
 public class CommonException extends Exception{
 
