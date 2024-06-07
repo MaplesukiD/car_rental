@@ -1,0 +1,25 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: car-rental
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/car?useSSL=false&serverTimezone=UTC
+    username: zuenhu
+    password: 123456
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+    cache:
+      redis:
+        time-to-live: 1800000 #设置缓存过期时间
+  jackson:
+    default-property-inclusion: non_null # JSON?????????
+mybatis-plus:
+  type-aliases-package: cqut.keshe3.domain # ?????
+logging:
+  level:
+    cqut.keshe3: debug
