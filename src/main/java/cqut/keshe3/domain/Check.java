@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * 
@@ -22,7 +22,7 @@ public class Check implements Serializable {
     /**
      * 检修日期
      */
-    private Date checkDate;
+    private LocalDateTime checkDate;
 
     /**
      * 车辆id
@@ -74,14 +74,14 @@ public class Check implements Serializable {
     /**
      * 检修日期
      */
-    public Date getCheckDate() {
+    public LocalDateTime getCheckDate() {
         return checkDate;
     }
 
     /**
      * 检修日期
      */
-    public void setCheckDate(Date checkDate) {
+    public void setCheckDate(LocalDateTime checkDate) {
         this.checkDate = checkDate;
     }
 
