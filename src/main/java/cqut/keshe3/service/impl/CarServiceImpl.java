@@ -1,6 +1,8 @@
 package cqut.keshe3.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cqut.keshe3.Exception.CommonException;
 import cqut.keshe3.domain.Car;
@@ -60,6 +62,12 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements CarSe
         if (flag != 1){
             throw new CommonException("车辆 " + car.getCarNumber() + " 更新失败");
         }
+    }
+
+    @Override
+    public IPage<Car> getCarPage(int currentPage, int pageSize) {
+        Page<Car> page = new Page<>(currentPage, pageSize);
+        return carMapper.selectPage(page, null);
     }
 }
 

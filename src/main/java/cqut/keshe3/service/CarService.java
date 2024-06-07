@@ -1,5 +1,6 @@
 package cqut.keshe3.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import cqut.keshe3.Exception.CommonException;
 import cqut.keshe3.domain.Car;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -16,4 +17,7 @@ public interface CarService extends IService<Car> {
 
     // 更新汽车信息
     void updateCar(Car car) throws CommonException;
+
+    //汽车分页
+    IPage<Car> getCarPage(int currentPage, int pageSize);
 }
