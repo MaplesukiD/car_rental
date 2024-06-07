@@ -1,7 +1,6 @@
 package cqut.keshe3.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cqut.keshe3.Exception.CommonException;
 import cqut.keshe3.domain.Car;
@@ -10,10 +9,6 @@ import cqut.keshe3.mapper.CarMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
 * @author MaplesukiD
