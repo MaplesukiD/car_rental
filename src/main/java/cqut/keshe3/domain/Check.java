@@ -4,17 +4,14 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
- * @author MaplesukiD
+ * 
  * @TableName check
- * @since 2024/6/2 17:13
  */
-@TableName(value = "check")
+@TableName(value ="check")
 public class Check implements Serializable {
     /**
      * id
@@ -25,7 +22,7 @@ public class Check implements Serializable {
     /**
      * 检修日期
      */
-    private LocalDateTime checkDate;
+    private Date checkDate;
 
     /**
      * 车辆id
@@ -52,6 +49,11 @@ public class Check implements Serializable {
      */
     private Integer orderId;
 
+    /**
+     * 0未处理 1处理
+     */
+    private Integer status;
+
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
@@ -72,14 +74,14 @@ public class Check implements Serializable {
     /**
      * 检修日期
      */
-    public LocalDateTime getCheckDate() {
+    public Date getCheckDate() {
         return checkDate;
     }
 
     /**
      * 检修日期
      */
-    public void setCheckDate(LocalDateTime checkDate) {
+    public void setCheckDate(Date checkDate) {
         this.checkDate = checkDate;
     }
 
@@ -153,6 +155,20 @@ public class Check implements Serializable {
         this.orderId = orderId;
     }
 
+    /**
+     * 0未处理 1处理
+     */
+    public Integer getStatus() {
+        return status;
+    }
+
+    /**
+     * 0未处理 1处理
+     */
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -166,12 +182,13 @@ public class Check implements Serializable {
         }
         Check other = (Check) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-                && (this.getCheckDate() == null ? other.getCheckDate() == null : this.getCheckDate().equals(other.getCheckDate()))
-                && (this.getCarId() == null ? other.getCarId() == null : this.getCarId().equals(other.getCarId()))
-                && (this.getError() == null ? other.getError() == null : this.getError().equals(other.getError()))
-                && (this.getScore() == null ? other.getScore() == null : this.getScore().equals(other.getScore()))
-                && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
-                && (this.getOrderId() == null ? other.getOrderId() == null : this.getOrderId().equals(other.getOrderId()));
+            && (this.getCheckDate() == null ? other.getCheckDate() == null : this.getCheckDate().equals(other.getCheckDate()))
+            && (this.getCarId() == null ? other.getCarId() == null : this.getCarId().equals(other.getCarId()))
+            && (this.getError() == null ? other.getError() == null : this.getError().equals(other.getError()))
+            && (this.getScore() == null ? other.getScore() == null : this.getScore().equals(other.getScore()))
+            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+            && (this.getOrderId() == null ? other.getOrderId() == null : this.getOrderId().equals(other.getOrderId()))
+            && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()));
     }
 
     @Override
@@ -185,6 +202,7 @@ public class Check implements Serializable {
         result = prime * result + ((getScore() == null) ? 0 : getScore().hashCode());
         result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
         result = prime * result + ((getOrderId() == null) ? 0 : getOrderId().hashCode());
+        result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         return result;
     }
 
@@ -201,6 +219,7 @@ public class Check implements Serializable {
         sb.append(", score=").append(score);
         sb.append(", userId=").append(userId);
         sb.append(", orderId=").append(orderId);
+        sb.append(", status=").append(status);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
