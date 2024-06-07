@@ -1,5 +1,7 @@
 package cqut.keshe3.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cqut.keshe3.Exception.CommonException;
 import cqut.keshe3.common.Code;
 import cqut.keshe3.common.Result;
@@ -51,4 +53,9 @@ public class CarController {
         }
     }
 
+    @GetMapping("/page")
+    public Result<IPage<Car>> getPage(@RequestParam int currentPage, @RequestParam int pageSize){
+        IPage<Car> carPage = carService.getCarPage(currentPage, pageSize);
+        return new Result<>(Code.GET_OK,carPage,Code.GET_OK_MESSAGE);
+    }
 }
