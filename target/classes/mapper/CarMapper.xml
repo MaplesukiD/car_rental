@@ -6,21 +6,33 @@
 
     <resultMap id="BaseResultMap" type="cqut.keshe3.domain.Car">
             <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="carName" column="car_name" jdbcType="VARCHAR"/>
             <result property="carNumber" column="car_number" jdbcType="VARCHAR"/>
             <result property="carType" column="car_type" jdbcType="VARCHAR"/>
             <result property="color" column="color" jdbcType="VARCHAR"/>
             <result property="price" column="price" jdbcType="DECIMAL"/>
             <result property="rentPrice" column="rent_price" jdbcType="DECIMAL"/>
             <result property="deposit" column="deposit" jdbcType="INTEGER"/>
+            <result property="img" column="img" jdbcType="VARCHAR"/>
+            <result property="electric" column="electric" jdbcType="INTEGER"/>
+            <result property="seat" column="seat" jdbcType="INTEGER"/>
+            <result property="door" column="door" jdbcType="INTEGER"/>
+            <result property="auto" column="auto" jdbcType="INTEGER"/>
+            <result property="motivity" column="motivity" jdbcType="DECIMAL"/>
+            <result property="drive" column="drive" jdbcType="INTEGER"/>
+            <result property="petrol" column="petrol" jdbcType="INTEGER"/>
             <result property="state" column="state" jdbcType="INTEGER"/>
             <result property="description" column="description" jdbcType="VARCHAR"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,car_number,car_type,
-        color,price,rent_price,
-        deposit,state,description,
+        id,car_name,car_number,
+        car_type,color,price,
+        rent_price,deposit,img,
+        electric,seat,door,
+        auto,motivity,drive,
+        petrol,state,description,
         create_time
     </sql>
 </mapper>

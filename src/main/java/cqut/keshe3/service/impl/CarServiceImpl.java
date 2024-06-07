@@ -1,7 +1,6 @@
 package cqut.keshe3.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cqut.keshe3.Exception.CommonException;
@@ -65,9 +64,28 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements CarSe
     }
 
     @Override
-    public IPage<Car> getCarPage(int currentPage, int pageSize) {
+    public Page<Car> getCarPage(int currentPage, int pageSize) {
         Page<Car> page = new Page<>(currentPage, pageSize);
         return carMapper.selectPage(page, null);
+    }
+
+    // 汽车出库
+    @Override
+    public void deleteById(Integer id) throws CommonException {
+        // 1.查看当前车辆的状态
+        Car car = carMapper.selectById(id);
+
+        // 2.如果在租 则抛异常
+        if(car.getState() == 1){
+            throw new CommonException("汽车在租，不能删除！");
+        }
+
+        // 3.汽车空闲 执行删除
+        int flag = carMapper.deleteById(id);
+        // 4.删除失败
+        if (flag != 1){
+            throw new CommonException("汽车 " + id + " 删除失败");
+        }
     }
 }
 
