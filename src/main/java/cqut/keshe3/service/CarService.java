@@ -20,7 +20,7 @@ public interface CarService extends IService<Car> {
     void updateCar(Car car) throws CommonException;
 
     // 汽车分页
-    Page<Car> getCarPage(int currentPage, int pageSize);
+    Page<Car> getCarPage(Integer currentPage, Integer pageSize);
 
     // 汽车出库
     void deleteById(Integer id) throws CommonException;

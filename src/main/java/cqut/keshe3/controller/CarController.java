@@ -24,59 +24,72 @@ public class CarController {
     private CarService carService;
 
     /**
-     汽车入库
+     * 汽车入库
+     *
      * @param car
      * @return: cqut.keshe3.common.Result<java.lang.String>
      */
     @PostMapping
-    public Result<String> save(@RequestBody Car car){
+    public Result<String> save(@RequestBody Car car) {
         try {
             carService.saveCar(car);
             return new Result<>(Code.SAVE_OK, Code.SAVE_OK_MESSAGE);
-        }catch (CommonException e){
+        } catch (CommonException e) {
             return new Result<>(Code.SAVE_ERR, e.getMessage());
         }
     }
 
     /**
-     更新汽车租借状态
+     * 更新汽车租借状态
+     *
      * @param car
      * @return: cqut.keshe3.common.Result<java.lang.String>
      */
     @PutMapping
-    public Result<String> update(@RequestBody Car car){
+    public Result<String> update(@RequestBody Car car) {
         try {
             carService.updateCar(car);
             return new Result<>(Code.UPDATE_OK, Code.UPDATE_OK_MESSAGE);
-        }catch (CommonException e){
+        } catch (CommonException e) {
             return new Result<>(Code.UPDATE_ERR, e.getMessage());
         }
     }
 
     /**
-     汽车列表分页查询
+     * 汽车列表分页查询
+     *
      * @param currentPage
      * @param pageSize
-     * @return: cqut.keshe3.common.Result<com.baomidou.mybatisplus.extension.plugins.pagination.Page<cqut.keshe3.domain.Car>>
+     * @return: cqut.keshe3.common.Result<com.baomidou.mybatisplus.extension.plugins.pagination.Page < cqut.keshe3.domain.Car>>
      */
     @GetMapping("/page")
-    public Result<Page<Car>> getPage(@RequestParam int currentPage, @RequestParam int pageSize){
+    public Result<Page<Car>> getPage(@RequestParam Integer currentPage, @RequestParam Integer pageSize) {
         Page<Car> carPage = carService.getCarPage(currentPage, pageSize);
-        return new Result<>(Code.GET_OK,carPage,Code.GET_OK_MESSAGE);
+        return new Result<>(Code.GET_OK, carPage, Code.GET_OK_MESSAGE);
     }
 
     /**
-     汽车出库
+     * 汽车出库
+     *
      * @param id
      * @return: cqut.keshe3.common.Result<java.lang.String>
      */
     @DeleteMapping
-    public Result<String> delete(@RequestParam Integer id){
+    public Result<String> delete(@RequestParam Integer id) {
         try {
             carService.deleteById(id);
             return new Result<>(Code.DELETE_OK, Code.DELETE_OK_MESSAGE);
         } catch (CommonException e) {
             return new Result<>(Code.DELETE_ERR, e.getMessage());
         }
+    }
+
+    @GetMapping
+    public Result<Car> getById(@RequestParam Integer id) {
+        Car car = carService.getById(id);
+        if (car != null) {
+            return new Result<>(Code.GET_OK, car, Code.GET_OK_MESSAGE);
+        }
+        return new Result<>(Code.GET_ERR, Code.GET_ERR_MESSAGE);
     }
 }

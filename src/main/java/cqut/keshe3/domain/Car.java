@@ -4,15 +4,17 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 
+ * @author MaplesukiD
  * @TableName car
+ * @since 2024/6/2 17:13
  */
-@TableName(value ="car")
+@TableName(value = "car")
 public class Car implements Serializable {
     /**
      * 车id
@@ -392,24 +394,24 @@ public class Car implements Serializable {
         }
         Car other = (Car) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getCarName() == null ? other.getCarName() == null : this.getCarName().equals(other.getCarName()))
-            && (this.getCarNumber() == null ? other.getCarNumber() == null : this.getCarNumber().equals(other.getCarNumber()))
-            && (this.getCarType() == null ? other.getCarType() == null : this.getCarType().equals(other.getCarType()))
-            && (this.getColor() == null ? other.getColor() == null : this.getColor().equals(other.getColor()))
-            && (this.getPrice() == null ? other.getPrice() == null : this.getPrice().equals(other.getPrice()))
-            && (this.getRentPrice() == null ? other.getRentPrice() == null : this.getRentPrice().equals(other.getRentPrice()))
-            && (this.getDeposit() == null ? other.getDeposit() == null : this.getDeposit().equals(other.getDeposit()))
-            && (this.getImg() == null ? other.getImg() == null : this.getImg().equals(other.getImg()))
-            && (this.getElectric() == null ? other.getElectric() == null : this.getElectric().equals(other.getElectric()))
-            && (this.getSeat() == null ? other.getSeat() == null : this.getSeat().equals(other.getSeat()))
-            && (this.getDoor() == null ? other.getDoor() == null : this.getDoor().equals(other.getDoor()))
-            && (this.getAuto() == null ? other.getAuto() == null : this.getAuto().equals(other.getAuto()))
-            && (this.getMotivity() == null ? other.getMotivity() == null : this.getMotivity().equals(other.getMotivity()))
-            && (this.getDrive() == null ? other.getDrive() == null : this.getDrive().equals(other.getDrive()))
-            && (this.getPetrol() == null ? other.getPetrol() == null : this.getPetrol().equals(other.getPetrol()))
-            && (this.getState() == null ? other.getState() == null : this.getState().equals(other.getState()))
-            && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()))
-            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()));
+                && (this.getCarName() == null ? other.getCarName() == null : this.getCarName().equals(other.getCarName()))
+                && (this.getCarNumber() == null ? other.getCarNumber() == null : this.getCarNumber().equals(other.getCarNumber()))
+                && (this.getCarType() == null ? other.getCarType() == null : this.getCarType().equals(other.getCarType()))
+                && (this.getColor() == null ? other.getColor() == null : this.getColor().equals(other.getColor()))
+                && (this.getPrice() == null ? other.getPrice() == null : this.getPrice().equals(other.getPrice()))
+                && (this.getRentPrice() == null ? other.getRentPrice() == null : this.getRentPrice().equals(other.getRentPrice()))
+                && (this.getDeposit() == null ? other.getDeposit() == null : this.getDeposit().equals(other.getDeposit()))
+                && (this.getImg() == null ? other.getImg() == null : this.getImg().equals(other.getImg()))
+                && (this.getElectric() == null ? other.getElectric() == null : this.getElectric().equals(other.getElectric()))
+                && (this.getSeat() == null ? other.getSeat() == null : this.getSeat().equals(other.getSeat()))
+                && (this.getDoor() == null ? other.getDoor() == null : this.getDoor().equals(other.getDoor()))
+                && (this.getAuto() == null ? other.getAuto() == null : this.getAuto().equals(other.getAuto()))
+                && (this.getMotivity() == null ? other.getMotivity() == null : this.getMotivity().equals(other.getMotivity()))
+                && (this.getDrive() == null ? other.getDrive() == null : this.getDrive().equals(other.getDrive()))
+                && (this.getPetrol() == null ? other.getPetrol() == null : this.getPetrol().equals(other.getPetrol()))
+                && (this.getState() == null ? other.getState() == null : this.getState().equals(other.getState()))
+                && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()))
+                && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()));
     }
 
     @Override

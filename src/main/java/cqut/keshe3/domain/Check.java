@@ -4,15 +4,17 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
- *
+ * @author MaplesukiD
  * @TableName check
+ * @since 2024/6/2 17:13
  */
-@TableName(value ="check")
+@TableName(value = "check")
 public class Check implements Serializable {
     /**
      * id
@@ -164,12 +166,12 @@ public class Check implements Serializable {
         }
         Check other = (Check) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getCheckDate() == null ? other.getCheckDate() == null : this.getCheckDate().equals(other.getCheckDate()))
-            && (this.getCarId() == null ? other.getCarId() == null : this.getCarId().equals(other.getCarId()))
-            && (this.getError() == null ? other.getError() == null : this.getError().equals(other.getError()))
-            && (this.getScore() == null ? other.getScore() == null : this.getScore().equals(other.getScore()))
-            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
-            && (this.getOrderId() == null ? other.getOrderId() == null : this.getOrderId().equals(other.getOrderId()));
+                && (this.getCheckDate() == null ? other.getCheckDate() == null : this.getCheckDate().equals(other.getCheckDate()))
+                && (this.getCarId() == null ? other.getCarId() == null : this.getCarId().equals(other.getCarId()))
+                && (this.getError() == null ? other.getError() == null : this.getError().equals(other.getError()))
+                && (this.getScore() == null ? other.getScore() == null : this.getScore().equals(other.getScore()))
+                && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+                && (this.getOrderId() == null ? other.getOrderId() == null : this.getOrderId().equals(other.getOrderId()));
     }
 
     @Override

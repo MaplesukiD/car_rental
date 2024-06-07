@@ -4,16 +4,18 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
- *
+ * @author MaplesukiD
+ * @since 2024/6/2 17:13
  * @TableName order
  */
-@TableName(value ="order")
+@TableName(value = "order")
 public class Order implements Serializable {
     /**
      * 订单id
@@ -184,13 +186,13 @@ public class Order implements Serializable {
         }
         Order other = (Order) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
-            && (this.getCarId() == null ? other.getCarId() == null : this.getCarId().equals(other.getCarId()))
-            && (this.getDeposit() == null ? other.getDeposit() == null : this.getDeposit().equals(other.getDeposit()))
-            && (this.getRentPrice() == null ? other.getRentPrice() == null : this.getRentPrice().equals(other.getRentPrice()))
-            && (this.getDays() == null ? other.getDays() == null : this.getDays().equals(other.getDays()))
-            && (this.getTotal() == null ? other.getTotal() == null : this.getTotal().equals(other.getTotal()))
-            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()));
+                && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+                && (this.getCarId() == null ? other.getCarId() == null : this.getCarId().equals(other.getCarId()))
+                && (this.getDeposit() == null ? other.getDeposit() == null : this.getDeposit().equals(other.getDeposit()))
+                && (this.getRentPrice() == null ? other.getRentPrice() == null : this.getRentPrice().equals(other.getRentPrice()))
+                && (this.getDays() == null ? other.getDays() == null : this.getDays().equals(other.getDays()))
+                && (this.getTotal() == null ? other.getTotal() == null : this.getTotal().equals(other.getTotal()))
+                && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()));
     }
 
     @Override

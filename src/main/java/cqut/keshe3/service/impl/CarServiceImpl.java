@@ -64,7 +64,7 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements CarSe
     }
 
     @Override
-    public Page<Car> getCarPage(int currentPage, int pageSize) {
+    public Page<Car> getCarPage(Integer currentPage, Integer pageSize) {
         Page<Car> page = new Page<>(currentPage, pageSize);
         return carMapper.selectPage(page, null);
     }
