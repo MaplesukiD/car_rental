@@ -2,12 +2,15 @@ package cqut.keshe3.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cqut.keshe3.Exception.CommonException;
+import cqut.keshe3.domain.Car;
 import cqut.keshe3.domain.User;
 import cqut.keshe3.dto.UserDto;
 import cqut.keshe3.service.UserService;
 import cqut.keshe3.mapper.UserMapper;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -96,6 +99,29 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (redisTemplate.hasKey(token)){
             redisTemplate.delete(token);
         }
+    }
+
+    // 分页查询（条件）
+    @Override
+    public Page<User> getUserPage(int currentPage, int pageSize, String username, String sex, String address) {
+        // 1.构建分页构造器
+        Page<User> page = new Page<>(currentPage, pageSize);
+
+        // 2.构造条件构造器
+        LambdaQueryWrapper<User> lqw = new LambdaQueryWrapper<>();
+
+        // 3.添加条件
+        // 3.1 添加username条件，不为空时模糊匹配
+        lqw.like(StringUtils.isNotEmpty(username), User::getUsername, username);
+        // 3.2 添加sex条件，不为空时匹配
+        lqw.eq(StringUtils.isNotEmpty(sex), User::getSex, sex);
+        // 3.3 添加address条件，不为空时模糊匹配
+        lqw.like(StringUtils.isNotEmpty(address), User::getAddress, address);
+        // 3.4 只查用户
+        lqw.eq(User::getType, 1);
+
+        //4.查询
+        return userMapper.selectPage(page, lqw);
     }
 
 }
