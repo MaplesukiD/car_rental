@@ -17,8 +17,15 @@ spring:
       time-to-live: 1800000 #设置缓存过期时间
   jackson:
     default-property-inclusion: non_null # JSON处理时忽略非空字段
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 mybatis-plus:
   type-aliases-package: cqut.keshe3.domain # 别名扫描包
 logging:
   level:
     cqut.keshe3: debug
+car_rental:
+  #图片信息上传下载路径
+  path: D:\大学课程\car-rental-img\
