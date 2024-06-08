@@ -19,9 +19,9 @@ public interface CarService extends IService<Car> {
     // 更新汽车信息
     void updateCar(Car car) throws CommonException;
 
-    // 汽车分页
-    Page<Car> getCarPage(Integer currentPage, Integer pageSize);
-
     // 汽车出库
     void deleteById(Integer id) throws CommonException;
+
+    // 汽车分页
+    Page<Car> getCarPage(int currentPage, int pageSize, String carName, String color, String carType);
 }

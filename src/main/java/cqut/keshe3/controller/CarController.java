@@ -40,7 +40,7 @@ public class CarController {
     }
 
     /**
-     * 更新汽车租借状态
+     * 更新汽车信息
      *
      * @param car
      * @return: cqut.keshe3.common.Result<java.lang.String>
@@ -63,8 +63,8 @@ public class CarController {
      * @return: cqut.keshe3.common.Result<com.baomidou.mybatisplus.extension.plugins.pagination.Page < cqut.keshe3.domain.Car>>
      */
     @GetMapping("/page")
-    public Result<Page<Car>> getPage(@RequestParam Integer currentPage, @RequestParam Integer pageSize) {
-        Page<Car> carPage = carService.getCarPage(currentPage, pageSize);
+    public Result<Page<Car>> getPage(@RequestParam int currentPage, @RequestParam int pageSize, @RequestParam String carName, @RequestParam String color, @RequestParam String carType) {
+        Page<Car> carPage = carService.getCarPage(currentPage, pageSize, carName, color, carType);
         return new Result<>(Code.GET_OK, carPage, Code.GET_OK_MESSAGE);
     }
 
@@ -84,6 +84,11 @@ public class CarController {
         }
     }
 
+    /**
+     根据id查询车辆信息
+     * @param id
+     * @return: cqut.keshe3.common.Result<cqut.keshe3.domain.Car>
+     */
     @GetMapping
     public Result<Car> getById(@RequestParam Integer id) {
         Car car = carService.getById(id);

@@ -7,6 +7,7 @@ import cqut.keshe3.Exception.CommonException;
 import cqut.keshe3.domain.Car;
 import cqut.keshe3.service.CarService;
 import cqut.keshe3.mapper.CarMapper;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -63,12 +64,6 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements CarSe
         }
     }
 
-    @Override
-    public Page<Car> getCarPage(Integer currentPage, Integer pageSize) {
-        Page<Car> page = new Page<>(currentPage, pageSize);
-        return carMapper.selectPage(page, null);
-    }
-
     // 汽车出库
     @Override
     public void deleteById(Integer id) throws CommonException {
@@ -86,6 +81,35 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements CarSe
         if (flag != 1){
             throw new CommonException("汽车 " + id + " 删除失败");
         }
+    }
+
+    /**
+     分页查询（条件：颜色、车名、类型）
+     * @param currentPage
+     * @param pageSize
+     * @param carName
+     * @param color
+     * @param carType
+     * @return: com.baomidou.mybatisplus.extension.plugins.pagination.Page<cqut.keshe3.domain.Car>
+     */
+    @Override
+    public Page<Car> getCarPage(int currentPage, int pageSize, String carName, String color, String carType) {
+        // 1.构建分页构造器
+        Page<Car> page = new Page<>(currentPage, pageSize);
+
+        // 2.构造条件构造器
+        LambdaQueryWrapper<Car> lqw = new LambdaQueryWrapper<>();
+
+        // 3.添加条件
+        // 3.1 添加carName条件，不为空时模糊匹配
+        lqw.like(StringUtils.isNotEmpty(carName), Car::getCarName, carName);
+        // 3.2 添加color条件，不为空时匹配
+        lqw.eq(StringUtils.isNotEmpty(color), Car::getColor, color);
+        // 3.3 添加carType条件，不为空时匹配
+        lqw.eq(StringUtils.isNotEmpty(carType), Car::getCarType, carType);
+
+        //4.查询
+        return carMapper.selectPage(page, lqw);
     }
 }
 
