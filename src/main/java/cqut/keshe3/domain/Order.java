@@ -15,7 +15,7 @@ import java.util.Date;
  * @since 2024/6/2 17:13
  * @TableName order
  */
-@TableName(value = "order")
+@TableName(value = "`order`")
 public class Order implements Serializable {
     /**
      * 订单id

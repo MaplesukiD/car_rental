@@ -1,7 +1,9 @@
 package cqut.keshe3.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cqut.keshe3.domain.Order;
 import com.baomidou.mybatisplus.extension.service.IService;
+import cqut.keshe3.dto.OrderDto;
 
 /**
 * @author MaplesukiD
@@ -10,4 +12,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface OrderService extends IService<Order> {
 
+    // 订单信息条件分页查询
+    Page<OrderDto> getOrderPage(int currentPage, int pageSize, String startDate, String endDate, String userId, String carName);
 }
