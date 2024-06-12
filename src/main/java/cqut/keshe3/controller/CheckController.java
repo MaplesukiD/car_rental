@@ -6,6 +6,7 @@ import cqut.keshe3.common.Code;
 import cqut.keshe3.common.Result;
 import cqut.keshe3.domain.Car;
 import cqut.keshe3.domain.Check;
+import cqut.keshe3.dto.CheckDto;
 import cqut.keshe3.service.CheckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -57,8 +58,8 @@ public class CheckController {
     }
 
     @GetMapping("/page")
-    public Result<Page<Check>> getPage(@RequestParam Integer currentPage, @RequestParam Integer pageSize) {
-        Page<Check> checkPage = checkService.getCheckPage(currentPage, pageSize);
+    public Result<Page> getPage(@RequestParam String carNumber,@RequestParam String startDate, @RequestParam String endDate, @RequestParam String status,@RequestParam Integer currentPage, @RequestParam Integer pageSize) {
+        Page<CheckDto> checkPage = checkService.getCheckPage(carNumber,startDate,endDate,status,currentPage, pageSize);
         return new Result<>(Code.GET_OK, checkPage, Code.GET_OK_MESSAGE);
     }
 

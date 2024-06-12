@@ -3,6 +3,7 @@ package cqut.keshe3.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cqut.keshe3.domain.Check;
 import com.baomidou.mybatisplus.extension.service.IService;
+import cqut.keshe3.dto.CheckDto;
 
 /**
 * @author MaplesukiD
@@ -11,5 +12,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface CheckService extends IService<Check> {
     // 检查单分页
-    Page<Check> getCheckPage(Integer currentPage, Integer pageSize);
+    Page<CheckDto> getCheckPage(String carNumber, String startDate, String endDate, String status, Integer currentPage, Integer pageSize);
+
 }

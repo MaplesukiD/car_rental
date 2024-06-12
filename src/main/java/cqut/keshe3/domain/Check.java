@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  * 
  * @TableName check
  */
-@TableName(value ="check")
+@TableName(value = "`check`")
 public class Check implements Serializable {
     /**
      * id
