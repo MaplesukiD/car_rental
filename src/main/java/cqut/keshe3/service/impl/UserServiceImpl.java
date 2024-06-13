@@ -10,11 +10,13 @@ import cqut.keshe3.domain.User;
 import cqut.keshe3.dto.UserDto;
 import cqut.keshe3.service.UserService;
 import cqut.keshe3.mapper.UserMapper;
+import cqut.keshe3.utils.UserHolder;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -44,29 +46,24 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         // 2. 匹配用户名
         LambdaQueryWrapper<User> lqw = new LambdaQueryWrapper<>();
         lqw.eq(User::getUsername, username);
-        User temp = userMapper.selectOne(lqw);
-        if(temp == null){
+        User user1 = userMapper.selectOne(lqw);
+        if(user1 == null){
             throw new CommonException("用户名不存在");
         }
 
         // 3. 继续匹配密码
-        if(!temp.getPassword().equals(password)){
+        if(!user1.getPassword().equals(password)){
             throw new CommonException("密码错误");
         }
 
         // 4. 查看账号活跃状态
-        if(temp.getAvailable() == 0){
+        if(user1.getAvailable() == 0){
             throw new CommonException("您已被禁用");
         }
 
-        // 5. 产看身份是否匹配
-        UserDto userDto = BeanUtil.toBean(temp, UserDto.class);
-
         // 5. 将信息放入缓存
-        String token = UUID.randomUUID().toString();
-        if(redisTemplate.hasKey(token)){
-            redisTemplate.delete(token);
-        }
+        String token= UUID.randomUUID().toString();
+        UserDto userDto=BeanUtil.copyProperties(user1,UserDto.class);
         redisTemplate.opsForValue().set(token, userDto, 1, TimeUnit.HOURS);
         return token;
     }
@@ -96,9 +93,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     // 退出
     @Override
     public void logout(String token) {
-        if (redisTemplate.hasKey(token)){
-            redisTemplate.delete(token);
-        }
+        redisTemplate.delete(token.substring(7));
+        UserHolder.removeUser();
     }
 
     // 分页查询（条件）
