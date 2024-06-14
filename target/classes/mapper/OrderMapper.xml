@@ -8,16 +8,20 @@
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="userId" column="user_id" jdbcType="INTEGER"/>
             <result property="carId" column="car_id" jdbcType="INTEGER"/>
+            <result property="checkId" column="check_id" jdbcType="INTEGER"/>
             <result property="deposit" column="deposit" jdbcType="INTEGER"/>
             <result property="rentPrice" column="rent_price" jdbcType="DECIMAL"/>
             <result property="days" column="days" jdbcType="INTEGER"/>
             <result property="total" column="total" jdbcType="DECIMAL"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+            <result property="deductionDeposit" column="deduction_deposit" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,user_id,car_id,
-        deposit,rent_price,days,
-        total,create_time
+        check_id,deposit,rent_price,
+        days,total,create_time,
+        status,deduction_deposit
     </sql>
 </mapper>
