@@ -4,15 +4,13 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
 import java.io.Serializable;
 
 /**
- * @author MaplesukiD
+ * 
  * @TableName user
- * @since 2024/6/2 17:13
  */
-@TableName(value = "user")
+@TableName(value ="user")
 public class User implements Serializable {
     /**
      * 用户id
@@ -59,6 +57,11 @@ public class User implements Serializable {
      * 活跃状态 0-禁用 1-活跃
      */
     private Integer available;
+
+    /**
+     * 头像
+     */
+    private String img;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
@@ -189,6 +192,20 @@ public class User implements Serializable {
         this.available = available;
     }
 
+    /**
+     * 头像
+     */
+    public String getImg() {
+        return img;
+    }
+
+    /**
+     * 头像
+     */
+    public void setImg(String img) {
+        this.img = img;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -202,14 +219,15 @@ public class User implements Serializable {
         }
         User other = (User) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-                && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
-                && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
-                && (this.getIdentity() == null ? other.getIdentity() == null : this.getIdentity().equals(other.getIdentity()))
-                && (this.getRealName() == null ? other.getRealName() == null : this.getRealName().equals(other.getRealName()))
-                && (this.getSex() == null ? other.getSex() == null : this.getSex().equals(other.getSex()))
-                && (this.getAddress() == null ? other.getAddress() == null : this.getAddress().equals(other.getAddress()))
-                && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
-                && (this.getAvailable() == null ? other.getAvailable() == null : this.getAvailable().equals(other.getAvailable()));
+            && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
+            && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
+            && (this.getIdentity() == null ? other.getIdentity() == null : this.getIdentity().equals(other.getIdentity()))
+            && (this.getRealName() == null ? other.getRealName() == null : this.getRealName().equals(other.getRealName()))
+            && (this.getSex() == null ? other.getSex() == null : this.getSex().equals(other.getSex()))
+            && (this.getAddress() == null ? other.getAddress() == null : this.getAddress().equals(other.getAddress()))
+            && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
+            && (this.getAvailable() == null ? other.getAvailable() == null : this.getAvailable().equals(other.getAvailable()))
+            && (this.getImg() == null ? other.getImg() == null : this.getImg().equals(other.getImg()));
     }
 
     @Override
@@ -225,6 +243,7 @@ public class User implements Serializable {
         result = prime * result + ((getAddress() == null) ? 0 : getAddress().hashCode());
         result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
         result = prime * result + ((getAvailable() == null) ? 0 : getAvailable().hashCode());
+        result = prime * result + ((getImg() == null) ? 0 : getImg().hashCode());
         return result;
     }
 
@@ -243,6 +262,7 @@ public class User implements Serializable {
         sb.append(", address=").append(address);
         sb.append(", type=").append(type);
         sb.append(", available=").append(available);
+        sb.append(", img=").append(img);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

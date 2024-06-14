@@ -14,11 +14,13 @@
             <result property="address" column="address" jdbcType="VARCHAR"/>
             <result property="type" column="type" jdbcType="TINYINT"/>
             <result property="available" column="available" jdbcType="TINYINT"/>
+            <result property="img" column="img" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,username,password,
         identity,real_name,sex,
-        address,type,available
+        address,type,available,
+        img
     </sql>
 </mapper>

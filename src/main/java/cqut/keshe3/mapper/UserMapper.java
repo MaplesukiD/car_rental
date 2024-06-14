@@ -5,9 +5,9 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
-* @author MaplesukiD
+* @author Administrator
 * @description 针对表【user】的数据库操作Mapper
-* @createDate 2024-05-30 22:24:17
+* @createDate 2024-06-14 14:12:59
 * @Entity cqut.keshe3.domain.User
 */
 @Mapper
