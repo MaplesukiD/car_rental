@@ -19,14 +19,12 @@ public class InterceptorConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(refreshTokenInterceptor())
                 .addPathPatterns("/**").order(0);
-        registry.addInterceptor(loginInterceptor())
-                .addPathPatterns("/**")
-                .excludePathPatterns(
-                        "/user/login",
-                        "/user/register",
-                        "/user/me",
-                        "/user/logout"
-                ).order(1);
+//        registry.addInterceptor(loginInterceptor())
+////                .addPathPatterns("/**")
+//                .excludePathPatterns(
+////                        "/user/*"
+//                    "/**"
+//                ).order(1);
     }
 
     @Bean
