@@ -1,19 +1,16 @@
 package cqut.keshe3.service.impl;
 
-import cn.hutool.core.util.NumberUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cqut.keshe3.domain.Car;
 import cqut.keshe3.domain.Check;
-import cqut.keshe3.domain.Check;
 import cqut.keshe3.domain.User;
 import cqut.keshe3.dto.CheckDto;
-import cqut.keshe3.dto.CheckDto;
 import cqut.keshe3.mapper.CarMapper;
+import cqut.keshe3.mapper.CheckMapper;
 import cqut.keshe3.mapper.UserMapper;
 import cqut.keshe3.service.CheckService;
-import cqut.keshe3.mapper.CheckMapper;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,6 +95,14 @@ public class CheckServiceImpl extends ServiceImpl<CheckMapper, Check>
 
         //8.返回CheckDtoPage
         return checkDtoPage;
+    }
+
+    @Override
+    public List<Check> getByCarId(Integer carId) {
+        LambdaQueryWrapper<Check> lqw = new LambdaQueryWrapper<>();
+        lqw.eq(carId != null, Check::getCarId, carId);
+        List<Check> checkList = checkMapper.selectList(lqw);
+        return checkList;
     }
 }
 

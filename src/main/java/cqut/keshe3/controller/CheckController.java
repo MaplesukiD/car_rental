@@ -1,15 +1,15 @@
 package cqut.keshe3.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import cqut.keshe3.Exception.CommonException;
 import cqut.keshe3.common.Code;
 import cqut.keshe3.common.Result;
-import cqut.keshe3.domain.Car;
 import cqut.keshe3.domain.Check;
 import cqut.keshe3.dto.CheckDto;
 import cqut.keshe3.service.CheckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author MaplesukiD
@@ -50,8 +50,8 @@ public class CheckController {
 
     @GetMapping
     public Result<Check> getById(@RequestParam Integer id){
-        Check check=checkService.getById(id);
-        if(check!=null){
+        Check check = checkService.getById(id);
+        if(check != null){
             return new Result<>(Code.GET_OK, check, Code.GET_OK_MESSAGE);
         }
         return new Result<>(Code.GET_ERR, Code.GET_ERR_MESSAGE);
@@ -63,4 +63,9 @@ public class CheckController {
         return new Result<>(Code.GET_OK, checkPage, Code.GET_OK_MESSAGE);
     }
 
+    @GetMapping("/{carId}")
+    public Result<List<Check>> getByCarId(@PathVariable("carId") Integer carId) {
+        List<Check> checkList = checkService.getByCarId(carId);
+        return new Result<>(Code.GET_OK, checkList, Code.GET_OK_MESSAGE);
+    }
 }
