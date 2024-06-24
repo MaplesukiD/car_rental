@@ -3,12 +3,13 @@ package cqut.keshe3.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cqut.keshe3.common.Code;
 import cqut.keshe3.common.Result;
-import cqut.keshe3.domain.Car;
 import cqut.keshe3.domain.Order;
 import cqut.keshe3.dto.OrderDto;
 import cqut.keshe3.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author MaplesukiD
@@ -60,6 +61,15 @@ public class OrderController {
     public Result<String> update(@RequestBody Order order){
         orderService.updateById(order);
         return new Result<>(Code.UPDATE_OK, Code.UPDATE_OK_MESSAGE);
+    }
+
+    @GetMapping("/getAllByUserId")
+    public Result getById(@RequestParam Integer userId){
+        List<OrderDto> orderDtoList = orderService.getAllByUserId(userId);
+        if(orderDtoList != null || orderDtoList.size() > 0){
+            return new Result<>(Code.GET_OK, orderDtoList, Code.GET_OK_MESSAGE);
+        }
+        return new Result<>(Code.GET_ERR, Code.GET_ERR_MESSAGE);
     }
 
 }

@@ -8,9 +8,9 @@ import cqut.keshe3.domain.Order;
 import cqut.keshe3.domain.User;
 import cqut.keshe3.dto.OrderDto;
 import cqut.keshe3.mapper.CarMapper;
+import cqut.keshe3.mapper.OrderMapper;
 import cqut.keshe3.mapper.UserMapper;
 import cqut.keshe3.service.OrderService;
-import cqut.keshe3.mapper.OrderMapper;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,6 +97,37 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
         //8.返回orderDtoPage
         return orderDtoPage;
+    }
+
+    @Override
+    public List<OrderDto> getAllByUserId(Integer userId) {
+        LambdaQueryWrapper<Order> lqw = new LambdaQueryWrapper<>();
+        lqw.eq(Order::getUserId, userId)
+                .orderByDesc(Order::getCreateTime);
+        List<Order> orders = orderMapper.selectList(lqw);
+        List<OrderDto> orderDtoList = orders.stream().map((item) -> {
+            OrderDto orderDto = new OrderDto();
+
+            // 6.1 将item拷贝到orderDto中，全部拷贝
+            BeanUtils.copyProperties(item, orderDto);
+
+            // 6.2 获取该订单对应的用户id和车辆id
+            Integer userID = orderDto.getUserId();
+            Integer carID = orderDto.getCarId();
+
+            // 6.3 查询该订单对应的用户和车辆信息
+            User user = userMapper.selectById(userID);
+            Car car = carMapper.selectById(carID);
+
+            // 6.4 把该订单的用户名和车名加入orderDto
+            orderDto.setUsername(user.getUsername());
+            orderDto.setCarName(car.getCarName());
+
+            //6.5返回orderDto => 最终组合成 List集合
+            return orderDto;
+
+        }).collect(Collectors.toList());
+        return orderDtoList;
     }
 }
 
