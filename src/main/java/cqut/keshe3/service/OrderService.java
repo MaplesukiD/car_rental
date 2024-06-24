@@ -1,6 +1,7 @@
 package cqut.keshe3.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import cqut.keshe3.Exception.CommonException;
 import cqut.keshe3.domain.Order;
 import com.baomidou.mybatisplus.extension.service.IService;
 import cqut.keshe3.dto.OrderDto;
@@ -18,4 +19,6 @@ public interface OrderService extends IService<Order> {
     Page<OrderDto> getOrderPage(int currentPage, int pageSize, String startDate, String endDate, String userId, String carName);
 
     List<OrderDto> getAllByUserId(Integer userId);
+
+    void saveOrder(Order order) throws CommonException;
 }

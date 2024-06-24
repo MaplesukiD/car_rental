@@ -3,6 +3,7 @@ package cqut.keshe3.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import cqut.keshe3.Exception.CommonException;
 import cqut.keshe3.domain.Car;
 import cqut.keshe3.domain.Order;
 import cqut.keshe3.domain.User;
@@ -16,6 +17,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -128,6 +130,18 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
         }).collect(Collectors.toList());
         return orderDtoList;
+    }
+
+    @Override
+    public void saveOrder(Order order) throws CommonException {
+        order.setDays(0);
+        order.setDeposit(0);
+        order.setCheckId(0);
+        order.setTotal(BigDecimal.valueOf(0));
+        order.setDeductionDeposit(0);
+        if (!save(order)){
+            throw new CommonException("订单创建失败");
+        }
     }
 }
 

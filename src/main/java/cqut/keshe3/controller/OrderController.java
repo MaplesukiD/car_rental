@@ -1,8 +1,10 @@
 package cqut.keshe3.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import cqut.keshe3.Exception.CommonException;
 import cqut.keshe3.common.Code;
 import cqut.keshe3.common.Result;
+import cqut.keshe3.domain.Car;
 import cqut.keshe3.domain.Order;
 import cqut.keshe3.dto.OrderDto;
 import cqut.keshe3.service.OrderService;
@@ -23,7 +25,8 @@ public class OrderController {
     private OrderService orderService;
 
     /**
-     订单信息分页查询 条件
+     * 订单信息分页查询 条件
+     *
      * @param currentPage
      * @param pageSize
      * @param startDate
@@ -39,34 +42,47 @@ public class OrderController {
     }
 
     /**
-     根据id查询低昂单信息
+     * 根据id查询低昂单信息
+     *
      * @param id
      * @return: cqut.keshe3.common.Result<cqut.keshe3.domain.Order>
      */
     @GetMapping
-    public Result<Order> getOrderById(@RequestParam Integer id){
+    public Result<Order> getOrderById(@RequestParam Integer id) {
         Order order = orderService.getById(id);
-        if(order != null){
+        if (order != null) {
             return new Result<>(Code.GET_OK, order, Code.GET_OK_MESSAGE);
         }
         return new Result<>(Code.GET_ERR, Code.GET_ERR_MESSAGE);
     }
 
     /**
-     更新订单信息
+     * 更新订单信息
+     *
      * @param order
      * @return: cqut.keshe3.common.Result<java.lang.String>
      */
     @PutMapping
-    public Result<String> update(@RequestBody Order order){
+    public Result<String> update(@RequestBody Order order) {
         orderService.updateById(order);
         return new Result<>(Code.UPDATE_OK, Code.UPDATE_OK_MESSAGE);
     }
 
+    @PostMapping
+    public Result<String> save(@RequestBody Order order) {
+        try {
+            orderService.saveOrder(order);
+            return new Result<>(Code.SAVE_OK, Code.SAVE_OK_MESSAGE);
+        } catch (CommonException e) {
+            return new Result<>(Code.SAVE_ERR, e.getMessage());
+        }
+    }
+
+
     @GetMapping("/getAllByUserId")
-    public Result getById(@RequestParam Integer userId){
+    public Result getById(@RequestParam Integer userId) {
         List<OrderDto> orderDtoList = orderService.getAllByUserId(userId);
-        if(orderDtoList != null || orderDtoList.size() > 0){
+        if (orderDtoList != null || orderDtoList.size() > 0) {
             return new Result<>(Code.GET_OK, orderDtoList, Code.GET_OK_MESSAGE);
         }
         return new Result<>(Code.GET_ERR, Code.GET_ERR_MESSAGE);
