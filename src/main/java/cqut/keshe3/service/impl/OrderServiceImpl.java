@@ -134,10 +134,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Override
     public void saveOrder(Order order) throws CommonException {
-        order.setDays(0);
-        order.setDeposit(0);
         order.setCheckId(0);
-        order.setTotal(BigDecimal.valueOf(0));
+        order.setTotal(order.getRentPrice().multiply(BigDecimal.valueOf(order.getDays())).add(BigDecimal.valueOf(order.getDeposit())));
         order.setDeductionDeposit(0);
         if (!save(order)){
             throw new CommonException("订单创建失败");

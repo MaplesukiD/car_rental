@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cqut.keshe3.Exception.CommonException;
 import cqut.keshe3.domain.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import cqut.keshe3.dto.UserRegisterDto;
 
 /**
 * @author MaplesukiD
@@ -16,7 +17,7 @@ public interface UserService extends IService<User> {
     String login(User user) throws CommonException;
 
     // 注册
-    void register(User user) throws CommonException;
+    void register(UserRegisterDto userRegisterDto) throws CommonException;
 
     // 退出
     void logout(String token);

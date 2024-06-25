@@ -1,10 +1,9 @@
 package cqut.keshe3.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
 import cqut.keshe3.Exception.CommonException;
 import cqut.keshe3.domain.Car;
-import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
 * @author MaplesukiD
@@ -23,5 +22,5 @@ public interface CarService extends IService<Car> {
     void deleteById(Integer id) throws CommonException;
 
     // 汽车分页
-    Page<Car> getCarPage(int currentPage, int pageSize, String carName, String color, String carType);
+    Page<Car> getCarPage(int currentPage, int pageSize, String carName, String color, String carType, Integer state);
 }

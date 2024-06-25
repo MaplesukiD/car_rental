@@ -93,7 +93,7 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements CarSe
      * @return: com.baomidou.mybatisplus.extension.plugins.pagination.Page<cqut.keshe3.domain.Car>
      */
     @Override
-    public Page<Car> getCarPage(int currentPage, int pageSize, String carName, String color, String carType) {
+    public Page<Car> getCarPage(int currentPage, int pageSize, String carName, String color, String carType, Integer state) {
         // 1.构建分页构造器
         Page<Car> page = new Page<>(currentPage, pageSize);
 
@@ -107,6 +107,8 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements CarSe
         lqw.eq(StringUtils.isNotEmpty(color), Car::getColor, color);
         // 3.3 添加carType条件，不为空时匹配
         lqw.eq(StringUtils.isNotEmpty(carType), Car::getCarType, carType);
+        // 3.4 添加状态条件，如果只查询空闲时匹配
+        lqw.eq(state == 0, Car::getState, state);
 
         //4.查询
         return carMapper.selectPage(page, lqw);

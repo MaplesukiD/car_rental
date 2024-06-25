@@ -1,13 +1,11 @@
 package cqut.keshe3.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cqut.keshe3.Exception.CommonException;
 import cqut.keshe3.common.Code;
 import cqut.keshe3.common.Result;
 import cqut.keshe3.domain.Car;
 import cqut.keshe3.service.CarService;
-import cqut.keshe3.service.impl.CarServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -63,8 +61,8 @@ public class CarController {
      * @return: cqut.keshe3.common.Result<com.baomidou.mybatisplus.extension.plugins.pagination.Page < cqut.keshe3.domain.Car>>
      */
     @GetMapping("/page")
-    public Result<Page<Car>> getPage(@RequestParam int currentPage, @RequestParam int pageSize, @RequestParam String carName, @RequestParam String color, @RequestParam String carType) {
-        Page<Car> carPage = carService.getCarPage(currentPage, pageSize, carName, color, carType);
+    public Result<Page<Car>> getPage(@RequestParam int currentPage, @RequestParam int pageSize, @RequestParam String carName, @RequestParam String color, @RequestParam String carType, @RequestParam Integer state) {
+        Page<Car> carPage = carService.getCarPage(currentPage, pageSize, carName, color, carType, state);
         return new Result<>(Code.GET_OK, carPage, Code.GET_OK_MESSAGE);
     }
 

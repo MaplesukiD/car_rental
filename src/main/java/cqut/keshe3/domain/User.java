@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import cqut.keshe3.dto.UserRegisterDto;
+
 import java.io.Serializable;
 
 /**
@@ -266,5 +268,18 @@ public class User implements Serializable {
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
+    }
+
+    public User(UserRegisterDto userRegisterDto){
+        this.realName = userRegisterDto.getRealName();
+        this.username = userRegisterDto.getUsername();
+        this.password = userRegisterDto.getPassword();
+        this.identity = userRegisterDto.getIdentity();
+        this.sex = userRegisterDto.getSex();
+        this.address = "";
+        for (int i = 0; i < userRegisterDto.getAddress().length; i++) {
+            this.address += userRegisterDto.getAddress()[i];
+        }
+        this.img = userRegisterDto.getImg();
     }
 }

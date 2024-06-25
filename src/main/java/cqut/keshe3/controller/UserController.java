@@ -4,9 +4,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cqut.keshe3.Exception.CommonException;
 import cqut.keshe3.common.Code;
 import cqut.keshe3.common.Result;
-import cqut.keshe3.domain.Car;
 import cqut.keshe3.domain.User;
 import cqut.keshe3.dto.UserDto;
+import cqut.keshe3.dto.UserRegisterDto;
 import cqut.keshe3.service.UserService;
 import cqut.keshe3.utils.UserHolder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,13 +43,13 @@ public class UserController {
     /**
      * 用户注册
      *
-     * @param user
+     * @param userRegisterDto
      * @return: cqut.keshe3.common.Result<java.lang.String>
      */
     @PostMapping("/register")
-    public Result<String> register(@RequestBody User user) {
+    public Result<String> register(@RequestBody UserRegisterDto userRegisterDto) {
         try {
-            userService.register(user);
+            userService.register(userRegisterDto);
             return new Result<>(Code.SAVE_OK, Code.SAVE_OK_MESSAGE);
         } catch (CommonException e) {
             return new Result<>(Code.SAVE_ERR, e.getMessage());

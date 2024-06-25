@@ -3,16 +3,12 @@ package cqut.keshe3.dto;
 import lombok.Data;
 
 /**
-    返回前端用户信息
+ * @ClassName UserRegisterDto
+ * @Author zuenhu
+ * @Date 2024/6/25 上午11:03
  */
-
 @Data
-public class UserDto {
-
-    /**
-     * 用户id
-     */
-    private Integer id;
+public class UserRegisterDto {
 
     /**
      * 用户名
@@ -37,13 +33,10 @@ public class UserDto {
     /**
      * 地址
      */
-    private String address;
-
-    /**
-     * 类型 0-管理 1-用户
-     */
-    private Integer type;
+    private String[] address;
 
     private String img;
+    private String checkPass;
+    private String password;
 
 }

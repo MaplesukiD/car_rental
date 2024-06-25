@@ -5,18 +5,17 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cqut.keshe3.Exception.CommonException;
-import cqut.keshe3.domain.Car;
 import cqut.keshe3.domain.User;
 import cqut.keshe3.dto.UserDto;
-import cqut.keshe3.service.UserService;
+import cqut.keshe3.dto.UserRegisterDto;
 import cqut.keshe3.mapper.UserMapper;
+import cqut.keshe3.service.UserService;
 import cqut.keshe3.utils.UserHolder;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -63,16 +62,22 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         // 5. 将信息放入缓存
         String token= UUID.randomUUID().toString();
-        UserDto userDto=BeanUtil.copyProperties(user1,UserDto.class);
+        UserDto userDto = BeanUtil.copyProperties(user1,UserDto.class);
         redisTemplate.opsForValue().set(token, userDto, 1, TimeUnit.HOURS);
         return token;
     }
 
     // 注册
     @Override
-    public void register(User user) throws CommonException {
+    public void register(UserRegisterDto userRegisterDto) throws CommonException {
         // 传入数据：用户名、密码、真名、年龄、性别、身份证、地址
         // 缺少数据：类型、活跃状态
+
+        if(!userRegisterDto.getPassword().equals(userRegisterDto.getCheckPass())){
+            throw new CommonException("两次输入密码不同");
+        }
+
+        User user = new User(userRegisterDto);
 
         // 1.添加缺少数据
         user.setAvailable(1);
