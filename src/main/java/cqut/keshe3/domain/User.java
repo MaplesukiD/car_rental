@@ -282,4 +282,8 @@ public class User implements Serializable {
         }
         this.img = userRegisterDto.getImg();
     }
+
+    public User(){
+
+    }
 }
